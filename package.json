@@ -4,6 +4,7 @@
   "description": "Типотека",
   "main": "./src/service/service.js",
   "scripts": {
+    "start": "node ./src/service/service.js",
     "test": "npm run eslint",
     "eslint": "eslint --ext .js src/"
   },
