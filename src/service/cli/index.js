@@ -1,8 +1,8 @@
 'use strict';
 
-const help = require('./help');
-const version = require('./version');
-const generate = require('./generate');
+const help = require(`./help`);
+const version = require(`./version`);
+const generate = require(`./generate`);
 
 module.exports = {
   Cli: {
@@ -10,4 +10,4 @@ module.exports = {
     [version.name]: version,
     [generate.name]: generate,
   }
-}
+};
