@@ -14,3 +14,25 @@ module.exports.shuffle = (someArray) => {
 
   return someArray;
 };
+
+module.exports.getRandomDate = (period = 3, periodType = `month`) => {
+  const dateNow = Date.now();
+  let dateStart;
+
+  switch(periodType) {
+    case `day`:
+      dateStart = dateNow - period * 24 * 60 * 60 * 1000;
+      break;
+    case `year`:
+      dateStart = dateNow - period * 365 * 24 * 60 * 60 * 1000;
+      break;
+    case `month`:
+    default:
+      dateStart = dateNow - period * 30 * 24 * 60 * 60 * 1000;
+      break;
+  }
+
+  const newDate = new Date(this.getRandomInt(dateStart, dateNow));
+
+  return `${[newDate.getFullYear(), newDate.getMonth() + 1, newDate.getDate()].map(number => `${number}`.padStart(2, `0`)).join(`-`)} ${[newDate.getHours(), newDate.getMinutes(), newDate.getSeconds()].join(`:`)}`;
+};
