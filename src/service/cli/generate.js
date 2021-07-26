@@ -67,6 +67,15 @@ const TextRestrict = {
   MAX: 300,
 };
 
+const getRandomArrayItem = (array) => array[getRandomInt(0, array.length - 1)];
+/**
+ * Возвращает указанное количество элементов массива взятых случайно
+ * @param {Array} array
+ * @param {number} itemsNumber
+ * @return {Array}
+ */
+ const getRandomItemsFromArray = (array, itemsNumber) => shuffle(array).slice(0, itemsNumber);
+
 const generatePosts = (count) => {
   if (count > MAX_COUNT) {
     console.error(`Не больше ${MAX_COUNT} публикаций`);
@@ -74,11 +83,11 @@ const generatePosts = (count) => {
   }
 
   return Array(count).fill({}).map(() => ({
-    title: TITLES[getRandomInt(0, TITLES.length - 1)],
-    announce: shuffle(SENTENCES).slice(0, 4).join(` `),
-    fullText: Array(getRandomInt(TextRestrict.MIN, TextRestrict.MAX)).fill(``).map(() => SENTENCES[getRandomInt(0, SENTENCES.length - 1)]).join(` `),
+    title: getRandomArrayItem(TITLES),
+    announce: getRandomItemsFromArray(SENTENCES, getRandomInt(1, 5)).join(` `),
+    fullText: getRandomItemsFromArray(SENTENCES, getRandomInt(1, SENTENCES.length - 1)).join(` `),
     createdDate: getRandomDate(3, `month`),
-    сategory: CATEGORIES[getRandomInt(0, TITLES.length - 1)],
+    сategory: getRandomItemsFromArray(CATEGORIES, getRandomInt(1, CATEGORIES.length - 1)),
   }));
 };
 
