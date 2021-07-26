@@ -62,11 +62,6 @@ const CATEGORIES = [
   `Железо`,
 ];
 
-const TextRestrict = {
-  MIN: 100,
-  MAX: 300,
-};
-
 const getRandomArrayItem = (array) => array[getRandomInt(0, array.length - 1)];
 /**
  * Возвращает указанное количество элементов массива взятых случайно
@@ -74,7 +69,7 @@ const getRandomArrayItem = (array) => array[getRandomInt(0, array.length - 1)];
  * @param {number} itemsNumber
  * @return {Array}
  */
- const getRandomItemsFromArray = (array, itemsNumber) => shuffle(array).slice(0, itemsNumber);
+const getRandomItemsFromArray = (array, itemsNumber) => shuffle(array).slice(0, itemsNumber);
 
 const generatePosts = (count) => {
   if (count > MAX_COUNT) {
