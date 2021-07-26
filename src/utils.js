@@ -32,9 +32,7 @@ const getRandomDate = (period = 3, periodType = `month`) => {
       break;
   }
 
-  const newDate = new Date(getRandomInt(dateStart, dateNow));
-
-  return `${[newDate.getFullYear(), newDate.getMonth() + 1, newDate.getDate()].map((number) => `${number}`.padStart(2, `0`)).join(`-`)} ${[newDate.getHours(), newDate.getMinutes(), newDate.getSeconds()].map((number) => `${number}`.padStart(2, `0`)).join(`:`)}`;
+  return getRandomInt(dateStart, dateNow);
 };
 
 module.exports = {
