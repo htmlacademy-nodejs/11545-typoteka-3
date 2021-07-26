@@ -70,7 +70,7 @@ const TextRestrict = {
 const generatePosts = (count) => {
   if (count > MAX_COUNT) {
     console.error(`Не больше ${MAX_COUNT} публикаций`);
-    process.exit(ExitCode.error);
+    process.exit(ExitCode.ERROR);
   }
 
   return Array(count).fill({}).map(() => ({
@@ -91,7 +91,8 @@ module.exports = {
 
     fs.writeFile(FILE_NAME, content, (error) => {
       if (error) {
-        return console.error(`Не удалось записать данные в файл moсks.json`);
+        console.error(`Не удалось записать данные в файл moсks.json`);
+        process.exit(ExitCode.ERROR);
       }
 
       return console.info(`Файл с mock данными создан`);
