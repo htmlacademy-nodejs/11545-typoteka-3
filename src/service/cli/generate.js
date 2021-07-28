@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require(`fs`);
+const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
 const {ExitCode} = require(`../../constants`);
 const {
@@ -89,18 +89,17 @@ const generatePosts = (count) => {
 
 module.exports = {
   name: `--generate`,
-  run(args) {
+  async run(args) {
     const [count] = args;
     const countPosts = Number.parseInt(count, 10) || DEFAULT_COUNT;
     const content = JSON.stringify(generatePosts(countPosts));
 
-    fs.writeFile(FILE_NAME, content, (error) => {
-      if (error) {
-        console.error(chalk.red(`Не удалось записать данные в файл moсks.json`));
-        process.exit(ExitCode.ERROR);
-      }
-
-      return console.info(chalk.green(`Файл с mock данными создан`));
-    });
+    try {
+      await fs.writeFile(FILE_NAME, content);
+      console.info(chalk.green(`Файл с mock данными создан`));
+    } catch (error) {
+      console.error(chalk.red(`Не удалось записать данные в файл moсks.json\nОшибка: ${error}`));
+      process.exit(ExitCode.ERROR);
+    }
   },
 };
