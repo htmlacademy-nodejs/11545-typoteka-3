@@ -24,6 +24,7 @@
     "nodemon": "2.0.12"
   },
   "dependencies": {
-    "chalk": "4.1.1"
+    "chalk": "4.1.1",
+    "express": "4.17.1"
   }
 }
