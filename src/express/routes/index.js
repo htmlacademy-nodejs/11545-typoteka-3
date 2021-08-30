@@ -1,16 +1,16 @@
 'use strict';
 
-const express = require(`express`);
+const {Router} = require(`express`);
 const mainRouter = require(`./main-routes`);
 const myRouter = require(`./my-routes.js`);
 const articlesRouter = require(`./articles-routes`);
 const categoriesRouter = require(`./categories-routes`);
 
-const app = express();
+const appRouter = new Router();
 
-app.use(`/`, mainRouter);
-app.use(`/my`, myRouter);
-app.use(`/articles`, articlesRouter);
-app.use(`/categories`, categoriesRouter);
+appRouter.use(`/`, mainRouter);
+appRouter.use(`/my`, myRouter);
+appRouter.use(`/articles`, articlesRouter);
+appRouter.use(`/categories`, categoriesRouter);
 
-module.exports = app;
+module.exports = appRouter;
