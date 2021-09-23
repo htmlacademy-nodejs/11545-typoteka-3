@@ -1,0 +1,77 @@
+# Список категорий
+GET http://localhost:3000/api/categories HTTP/1.1
+
+###
+
+#Поиск
+GET http://localhost:3000/api/search?query=камни HTTP/1.1
+
+###
+
+# Все статьи
+GET http://localhost:3000/api/articles HTTP/1.1
+
+###
+
+# Запрашивает статью с идентификатором :id
+
+GET http://localhost:3000/api/articles/hlZemN HTTP/1.1
+
+###
+
+# Удаление статьи с идентификатором :id
+
+DELETE http://localhost:3000/api/articles/FY7zXR HTTP/1.1
+
+###
+
+# Добавление новой статьи
+
+POST http://localhost:3000/api/articles HTTP/1.1
+Content-Type: application/json
+
+{
+  "category": ["Разное"],
+  "announce": "Анонс",
+  "fullText": "много текста",
+  "title": "Самый крутой заголовок в истории",
+  "createdDate": "2021-08-23 16:00:00"
+}
+
+###
+
+# Обновление статьи
+
+PUT http://localhost:3000/api/articles/hlZemN HTTP/1.1
+Content-Type: application/json
+
+{
+  "category": ["Авто"],
+  "announce": "Джип Чероки",
+  "fullText": "Классная тачка",
+  "title": "Самая крутая тачка",
+  "createdDate": "2021-01-01 15:45:00"
+}
+
+###
+
+# Список комментариев
+
+GET http://localhost:3000/api/articles/hlZemN/comments HTTP/1.1
+
+###
+
+# Удаляет комментарий
+
+DELETE http://localhost:3000/api/articles/hlZemN/comments/wP19HT HTTP/1.1
+
+###
+
+# Добавляет новый комментарий к статье
+
+POST http://localhost:3000/api/articles/hlZemN/comments HTTP/1.1
+Content-Type: application/json
+
+{
+  "text": "Это новый комментарий"
+}

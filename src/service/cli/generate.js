@@ -68,7 +68,7 @@ const generatePosts = async (count) => {
     announce: getRandomItemsFromArray(sentences, getRandomInt(1, 5)).join(` `),
     fullText: getRandomItemsFromArray(sentences, getRandomInt(1, sentences.length - 1)).join(` `),
     createdDate: getRandomDate(3, `month`),
-    сategory: getRandomItemsFromArray(categories, getRandomInt(1, categories.length - 1)),
+    category: getRandomItemsFromArray(categories, getRandomInt(1, categories.length - 1)),
     comments: generateComments(comments, getRandomInt(1, MAX_COMMENTS))
   }));
 };
