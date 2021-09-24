@@ -2,7 +2,8 @@
 
 const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
-const {ExitCode} = require(`../../constants`);
+const {nanoid} = require(`nanoid`);
+const {ExitCode, MAX_ID_LENGTH} = require(`../../constants`);
 const {
   getRandomInt,
   shuffle,
@@ -12,11 +13,13 @@ const {
 const DEFAULT_COUNT = 1;
 const MAX_COUNT = 1000;
 const FILE_NAME = `mocks.json`;
+const MAX_COMMENTS = 10;
 
 const DataFileUrl = {
   TITLES: `./src/data/titles.txt`,
   SENTENCES: `./src/data/sentences.txt`,
   CATEGORIES: `./src/data/categories.txt`,
+  COMMENTS: `./src/data/comments.txt`,
 };
 
 const getRandomArrayItem = (array) => array[getRandomInt(0, array.length - 1)];
@@ -41,24 +44,32 @@ const getStringArrayFromFile = async (filePath) => {
   return data;
 };
 
+const generateComments = (comments, count) => Array(count).fill({}).map(() => ({
+  id: nanoid(MAX_ID_LENGTH),
+  text: shuffle(comments).slice(0, getRandomInt(1, 3)).join(` `),
+}));
+
 const generatePosts = async (count) => {
   if (count > MAX_COUNT) {
     console.error(chalk.red(`Не больше ${MAX_COUNT} публикаций`));
     process.exit(ExitCode.ERROR);
   }
 
-  const [categories, sentences, titles] = await Promise.all([
+  const [categories, sentences, titles, comments] = await Promise.all([
     getStringArrayFromFile(DataFileUrl.CATEGORIES),
     getStringArrayFromFile(DataFileUrl.SENTENCES),
     getStringArrayFromFile(DataFileUrl.TITLES),
+    getStringArrayFromFile(DataFileUrl.COMMENTS),
   ]);
 
   return Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
     title: getRandomArrayItem(titles),
     announce: getRandomItemsFromArray(sentences, getRandomInt(1, 5)).join(` `),
     fullText: getRandomItemsFromArray(sentences, getRandomInt(1, sentences.length - 1)).join(` `),
     createdDate: getRandomDate(3, `month`),
-    сategory: getRandomItemsFromArray(categories, getRandomInt(1, categories.length - 1)),
+    category: getRandomItemsFromArray(categories, getRandomInt(1, categories.length - 1)),
+    comments: generateComments(comments, getRandomInt(1, MAX_COMMENTS))
   }));
 };
 
