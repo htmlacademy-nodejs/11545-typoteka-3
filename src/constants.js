@@ -17,7 +17,7 @@ const HttpResponseCode = {
 };
 const MAX_ID_LENGTH = 6;
 const KeysForValidation = {
-  ARTICLE: [`title`, `announce`, `fullText`, `createdDate`, `category`],
+  ARTICLE: [`title`, `announce`, `fullText`, `category`],
   COMMENT: [`text`],
 };
 
