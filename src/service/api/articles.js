@@ -25,7 +25,7 @@ module.exports = (articleService, commentService) => {
   route.post(`/`, objectValidator(KeysForValidation.ARTICLE), (req, res) => {
     const newArticle = articleService.create(req.body);
 
-    return res.status(HttpResponseCode.OK).json(newArticle);
+    return res.status(HttpResponseCode.CREATED).json(newArticle);
   });
 
   route.put(`/:articleId`, articleExist(articleService), (req, res) => {
@@ -70,7 +70,7 @@ module.exports = (articleService, commentService) => {
     const {article} = res.locals;
     const newComment = commentService.create(article, req.body);
 
-    return res.status(HttpResponseCode.OK).json(newComment);
+    return res.status(HttpResponseCode.CREATED).json(newComment);
   });
 
   return route;
