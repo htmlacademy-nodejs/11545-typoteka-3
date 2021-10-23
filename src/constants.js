@@ -20,6 +20,10 @@ const KeysForValidation = {
   ARTICLE: [`title`, `announce`, `fullText`, `category`],
   COMMENT: [`text`],
 };
+const Env = {
+  DEVELOPMENT: `development`,
+  PRODUCTION: `production`
+};
 
 module.exports = {
   DEFAULT_COMMAND,
@@ -28,4 +32,5 @@ module.exports = {
   HttpResponseCode,
   MAX_ID_LENGTH,
   KeysForValidation,
+  Env,
 };

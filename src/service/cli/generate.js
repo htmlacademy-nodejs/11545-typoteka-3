@@ -1,7 +1,6 @@
 'use strict';
 
 const fs = require(`fs`).promises;
-const chalk = require(`chalk`);
 const {nanoid} = require(`nanoid`);
 const {ExitCode, MAX_ID_LENGTH} = require(`../../constants`);
 const {
@@ -9,7 +8,9 @@ const {
   shuffle,
   getRandomDate,
 } = require(`../../utils`);
+const {getLogger} = require(`../lib/logger`);
 
+const logger = getLogger({name: `api`});
 const DEFAULT_COUNT = 1;
 const MAX_COUNT = 1000;
 const FILE_NAME = `mocks.json`;
@@ -37,7 +38,7 @@ const getStringArrayFromFile = async (filePath) => {
   try {
     data = (await fs.readFile(filePath, `utf-8`)).split(`\n`);
   } catch (error) {
-    console.error(chalk.red(`Ошибка чтения файла ${filePath}\n${error}`));
+    logger.error(`Ошибка чтения файла ${filePath}\n${error}`);
     process.exit(ExitCode.ERROR);
   }
 
@@ -51,7 +52,7 @@ const generateComments = (comments, count) => Array(count).fill({}).map(() => ({
 
 const generatePosts = async (count) => {
   if (count > MAX_COUNT) {
-    console.error(chalk.red(`Не больше ${MAX_COUNT} публикаций`));
+    logger.error(`Не больше ${MAX_COUNT} публикаций`);
     process.exit(ExitCode.ERROR);
   }
 
@@ -82,9 +83,9 @@ module.exports = {
     try {
       const content = await generatePosts(countPosts);
       await fs.writeFile(FILE_NAME, JSON.stringify(content));
-      console.info(chalk.green(`Файл с mock данными создан`));
+      logger.info(`Файл с mock данными создан`);
     } catch (error) {
-      console.error(chalk.red(`Не удалось записать данные в файл moсks.json\nОшибка: ${error}`));
+      logger.error(`Не удалось записать данные в файл moсks.json\nОшибка: ${error}`);
       process.exit(ExitCode.ERROR);
     }
   },
