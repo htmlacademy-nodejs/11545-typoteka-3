@@ -28,7 +28,7 @@ module.exports = (articleService, commentService) => {
     return res.status(HttpResponseCode.CREATED).json(newArticle);
   });
 
-  route.put(`/:articleId`, articleExist(articleService), (req, res) => {
+  route.put(`/:articleId`, [articleExist(articleService), objectValidator(KeysForValidation.ARTICLE)], (req, res) => {
     const updatedArticle = articleService.update(res.locals.article, req.body);
 
     return res.status(HttpResponseCode.OK).json(updatedArticle);

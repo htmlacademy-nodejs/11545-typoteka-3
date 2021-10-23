@@ -41,7 +41,7 @@ Content-Type: application/json
 
 # Обновление статьи
 
-PUT http://localhost:3000/api/articles/dCBLRk HTTP/1.1
+PUT http://localhost:3000/api/articles/kU0Umn HTTP/1.1
 Content-Type: application/json
 
 {
